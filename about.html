@@ -1,0 +1,501 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | DevHub - Best Programming Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+    --bg-color: #000000;
+    --card-bg: #161616;
+    --border-color: #2D2D2D;
+    --primary-text: #FFFFFF;
+    --secondary-text: #9C9C9C;
+    --accent-color: #0A84FF;
+    --accent-hover: #007AFF;
+    --glass-bg: rgba(22, 22, 22, 0.7);
+    --glass-border: rgba(45, 45, 45, 0.5);
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-display: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--primary-text);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-text);
+}
+
+/* Glassmorphism */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+}
+
+/* Layout */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--border-color);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 260px;
+    padding-bottom: 80px; /* Space for mobile nav */
+}
+
+/* Header */
+.header {
+    height: 70px;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Cards */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 30px rgba(10, 132, 255, 0.1);
+}
+
+/* Grid System */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 0 2rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .sidebar {
+        display: none;
+    }
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    .header {
+        padding: 0 1rem;
+    }
+}
+
+/* Bottom Nav (Mobile) */
+.bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 1000;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+@media (max-width: 1024px) {
+    .bottom-nav {
+        display: flex;
+    }
+}
+
+/* Buttons */
+.btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+}
+
+.btn-secondary {
+    background: var(--border-color);
+    color: var(--primary-text);
+}
+
+.btn-secondary:hover {
+    background: #3d3d3d;
+}
+
+        
+        /* Skeleton Loading Animation */
+        @keyframes shimmer {
+            0% { background-position: -468px 0; }
+            100% { background-position: 468px 0; }
+        }
+        .skeleton {
+            background: #1a1a1a;
+            background-image: linear-gradient(to right, #1a1a1a 0%, #222 20%, #1a1a1a 40%, #1a1a1a 100%);
+            background-repeat: no-repeat;
+            background-size: 800px 104px;
+            display: inline-block;
+            position: relative;
+            animation: shimmer 1s linear infinite forwards;
+        }
+        
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--accent-color);
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #back-to-top {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div id="loading-overlay">
+        <span class="loader"></span>
+    </div>
+
+    <div class="app-container">
+        <div class="sidebar glass"><div style="margin-bottom: 2rem; font-family: var(--font-display); font-weight: 800; font-size: 1.8rem;">DevHub</div><nav style="display: flex; flex-direction: column; gap: 0.5rem;"><a href="index.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); color: var(--secondary-text);">Home</a><a href="explore.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); color: var(--secondary-text);">Explore</a><a href="categories.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); color: var(--secondary-text);">Categories</a><a href="ai-tools.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); color: var(--secondary-text);">AI Tools</a><a href="websites.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); color: var(--secondary-text);">Websites</a><a href="mobile-apps.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); color: var(--secondary-text);">Mobile Apps</a><a href="apis.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); color: var(--secondary-text);">APIs</a><a href="open-source.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); color: var(--secondary-text);">Open Source</a><a href="github-projects.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); color: var(--secondary-text);">GitHub Projects</a><a href="learning.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); color: var(--secondary-text);">Learning</a><a href="blog.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); color: var(--secondary-text);">Blog</a><a href="about.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); background: var(--accent-color); color: white;">About</a><a href="contact.html" style="text-decoration: none; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; transition: var(--transition); color: var(--secondary-text);">Contact</a></nav></div>
+        
+        <main class="main-content">
+            
+    <header class="header glass">
+        <div class="logo" style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--accent-color);">
+            DevHub
+        </div>
+        <div class="search-container" style="flex: 0.6; position: relative;">
+            <input type="text" id="search-input" placeholder="Search for tools, APIs, resources..." style="width: 100%; padding: 0.8rem 1rem 0.8rem 2.5rem; background: #111; border: 1px solid var(--border-color); border-radius: 10px; color: white; outline: none;">
+            <svg style="position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: var(--secondary-text);" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>
+        </div>
+        <div class="user-actions" style="display: flex; gap: 1rem;">
+            <a href="favorites.html" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Favorites</a>
+            <a href="contact.html" class="btn btn-primary" style="padding: 0.5rem 1rem;">Submit Tool</a>
+        </div>
+    </header>
+    
+            
+            <section style="padding: 4rem 2rem; max-width: 800px; margin: 0 auto;"><h1>About DevHub</h1><p style="margin-top: 2rem; color: var(--secondary-text);">DevHub is a curated directory of tools for developers. Our mission is to help developers find the best resources to build their next big thing.</p></section>
+            
+            
+    <footer style="margin-top: 5rem; padding: 4rem 2rem; border-top: 1px solid var(--border-color); background: #080808;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto;">
+            <div>
+                <h3 style="margin-bottom: 1.5rem; color: var(--accent-color);">DevHub</h3>
+                <p style="color: var(--secondary-text); font-size: 0.9rem;">The ultimate collection of tools and resources for developers and designers. Built for the community.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.2rem;">Resources</h4>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.8rem; font-size: 0.9rem;">
+                    <li><a href="explore.html" style="color: var(--secondary-text); text-decoration: none;">Explore Tools</a></li>
+                    <li><a href="apis.html" style="color: var(--secondary-text); text-decoration: none;">APIs Directory</a></li>
+                    <li><a href="learning.html" style="color: var(--secondary-text); text-decoration: none;">Learning Paths</a></li>
+                    <li><a href="blog.html" style="color: var(--secondary-text); text-decoration: none;">Dev Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.2rem;">Community</h4>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.8rem; font-size: 0.9rem;">
+                    <li><a href="open-source.html" style="color: var(--secondary-text); text-decoration: none;">Open Source</a></li>
+                    <li><a href="github-projects.html" style="color: var(--secondary-text); text-decoration: none;">GitHub Showcase</a></li>
+                    <li><a href="contact.html" style="color: var(--secondary-text); text-decoration: none;">Submit Tool</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.2rem;">Legal</h4>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.8rem; font-size: 0.9rem;">
+                    <li><a href="#" style="color: var(--secondary-text); text-decoration: none;">Privacy Policy</a></li>
+                    <li><a href="#" style="color: var(--secondary-text); text-decoration: none;">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #111; color: var(--secondary-text); font-size: 0.8rem;">
+            &copy; 2026 DevHub. All rights reserved. Designed with ❤️ for Developers.
+        </div>
+    </footer>
+    
+        </main>
+    </div>
+
+    
+    <nav class="bottom-nav glass">
+        <a href="index.html" style="color: var(--accent-color); display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; text-decoration: none;">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/></svg>
+            Home
+        </a>
+        <a href="explore.html" style="color: var(--secondary-text); display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; text-decoration: none;">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683z"/></svg>
+            Explore
+        </a>
+        <a href="categories.html" style="color: var(--secondary-text); display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; text-decoration: none;">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/></svg>
+            Apps
+        </a>
+        <a href="favorites.html" style="color: var(--secondary-text); display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; text-decoration: none;">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2z"/></svg>
+            Saved
+        </a>
+    </nav>
+    
+    
+    <div id="back-to-top">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/></svg>
+    </div>
+
+    <script>
+        
+const toolsData = [{"id": 1, "name": "ChatGPT", "logo": "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", "description": "Advanced AI language model by OpenAI for conversation and task automation.", "category": "AI", "rating": 4.9, "tags": ["LLM", "OpenAI", "Chat"], "url": "https://chat.openai.com"}, {"id": 2, "name": "Midjourney", "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Midjourney_Emblem.svg", "description": "Generative AI for creating high-quality artistic images from text prompts.", "category": "AI", "rating": 4.8, "tags": ["Images", "Art", "Design"], "url": "https://midjourney.com"}, {"id": 3, "name": "Claude AI", "logo": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Anthropic_logo.svg", "description": "Constitutional AI by Anthropic focusing on safety and long-context understanding.", "category": "AI", "rating": 4.7, "tags": ["LLM", "Safety", "Research"], "url": "https://claude.ai"}, {"id": 4, "name": "GitHub Copilot", "logo": "https://github.githubassets.com/images/modules/site/features/copilot/copilot-logo.png", "description": "AI pair programmer that helps you write code faster with less work.", "category": "AI", "rating": 4.9, "tags": ["Coding", "GitHub", "Autocompletion"], "url": "https://github.com/features/copilot"}, {"id": 5, "name": "Jasper", "logo": "https://www.jasper.ai/favicon.ico", "description": "AI content platform that helps teams create high-quality content faster.", "category": "AI", "rating": 4.5, "tags": ["Marketing", "Writing", "Business"], "url": "https://jasper.ai"}, {"id": 6, "name": "VS Code", "logo": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg", "description": "The most popular code editor with extensive plugin ecosystem.", "category": "Web Development", "rating": 5.0, "tags": ["Editor", "Microsoft", "Free"], "url": "https://code.visualstudio.com"}, {"id": 7, "name": "Next.js", "logo": "https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png", "description": "The React Framework for the Web, optimized for performance and SEO.", "category": "Web Development", "rating": 4.8, "tags": ["React", "Framework", "Vercel"], "url": "https://nextjs.org"}, {"id": 8, "name": "Tailwind CSS", "logo": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg", "description": "A utility-first CSS framework for rapid UI development.", "category": "Web Development", "rating": 4.9, "tags": ["CSS", "Design", "Frontend"], "url": "https://tailwindcss.com"}, {"id": 9, "name": "Vercel", "logo": "https://assets.vercel.com/image/upload/v1588805177/repositories/vercel/logo.png", "description": "Platform for frontend developers to deploy and scale instantly.", "category": "Web Development", "rating": 4.7, "tags": ["Hosting", "Deployment", "CI/CD"], "url": "https://vercel.com"}, {"id": 10, "name": "Figma", "logo": "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg", "description": "Collaborative interface design tool for teams.", "category": "Design", "rating": 4.9, "tags": ["UI", "UX", "Prototyping"], "url": "https://figma.com"}, {"id": 11, "name": "Stripe API", "logo": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg", "description": "Financial infrastructure for the internet to accept payments.", "category": "APIs", "rating": 4.9, "tags": ["Payments", "Finance", "SDK"], "url": "https://stripe.com"}, {"id": 12, "name": "Twilio", "logo": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Twilio-logo.svg", "description": "Communication APIs for SMS, Voice, Video, and Authentication.", "category": "APIs", "rating": 4.6, "tags": ["SMS", "Communication", "Auth"], "url": "https://twilio.com"}, {"id": 13, "name": "Google Maps API", "logo": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg", "description": "Build real-world map experiences with location data.", "category": "APIs", "rating": 4.7, "tags": ["Maps", "Location", "Google"], "url": "https://developers.google.com/maps"}, {"id": 14, "name": "Spotify API", "logo": "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg", "description": "Access data from the Spotify music catalog and manage user playlists.", "category": "APIs", "rating": 4.5, "tags": ["Music", "Data", "Entertainment"], "url": "https://developer.spotify.com"}, {"id": 15, "name": "freeCodeCamp", "logo": "https://upload.wikimedia.org/wikipedia/commons/3/39/FreeCodeCamp_logo.png", "description": "Learn to code for free with thousands of tutorials and certifications.", "category": "Learning", "rating": 5.0, "tags": ["Education", "Free", "Certificates"], "url": "https://freecodecamp.org"}, {"id": 16, "name": "Udemy", "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Udemy_logo.svg", "description": "Online learning and teaching marketplace with 213,000+ courses.", "category": "Learning", "rating": 4.4, "tags": ["Courses", "Paid", "Skills"], "url": "https://udemy.com"}, {"id": 17, "name": "Coursera", "logo": "https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg", "description": "Learn without limits with online degrees and certificates.", "category": "Learning", "rating": 4.6, "tags": ["University", "Degrees", "Academic"], "url": "https://coursera.org"}, {"id": 18, "name": "Flutter", "logo": "https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.svg", "description": "Google's UI toolkit for building natively compiled applications.", "category": "iOS", "rating": 4.8, "tags": ["Mobile", "Cross-platform", "Google"], "url": "https://flutter.dev"}, {"id": 19, "name": "React Native", "logo": "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg", "description": "Create native apps for Android and iOS using React.", "category": "Android", "rating": 4.7, "tags": ["Mobile", "React", "Meta"], "url": "https://reactnative.dev"}, {"id": 20, "name": "Docker", "logo": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg", "description": "OS-level virtualization to deliver software in packages called containers.", "category": "DevOps", "rating": 4.9, "tags": ["Containers", "Infrastructure", "Scaling"], "url": "https://docker.com"}, {"id": 21, "name": "AWS", "logo": "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg", "description": "Comprehensive and broadly adopted cloud platform.", "category": "Cloud", "rating": 4.8, "tags": ["Infrastructure", "Serverless", "Amazon"], "url": "https://aws.amazon.com"}, {"id": 22, "name": "Terraform", "logo": "https://upload.wikimedia.org/wikipedia/commons/0/04/Terraform_Logo.svg", "description": "Infrastructure as Code tool for building and changing infrastructure safely.", "category": "DevOps", "rating": 4.7, "tags": ["IaC", "HashiCorp", "Automation"], "url": "https://terraform.io"}, {"id": 23, "name": "Supabase", "logo": "https://seeklogo.com/images/S/supabase-logo-DCC416CAB2-seeklogo.com.png", "description": "The open source Firebase alternative with Postgres.", "category": "Database", "rating": 4.9, "tags": ["Postgres", "Auth", "Realtime"], "url": "https://supabase.com"}, {"id": 24, "name": "MongoDB", "logo": "https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg", "description": "The most popular NoSQL database for modern applications.", "category": "Database", "rating": 4.6, "tags": ["NoSQL", "JSON", "Cloud"], "url": "https://mongodb.com"}, {"id": 25, "name": "PlanetScale", "logo": "https://planetscale.com/favicon.ico", "description": "The world's most advanced serverless MySQL platform.", "category": "Database", "rating": 4.7, "tags": ["MySQL", "Serverless", "Scaling"], "url": "https://planetscale.com"}, {"id": 26, "name": "Auth0", "logo": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Auth0_logo.svg", "description": "Identity platform for application builders.", "category": "Security", "rating": 4.5, "tags": ["Auth", "Identity", "Okta"], "url": "https://auth0.com"}, {"id": 27, "name": "Snyk", "logo": "https://snyk.io/styleguide/assets/logos/snyk-logo-black.svg", "description": "Developer-first security platform for scanning code and dependencies.", "category": "Security", "rating": 4.6, "tags": ["Scanning", "DevSecOps", "Vulnerabilities"], "url": "https://snyk.io"}, {"id": 28, "name": "Notion", "logo": "https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png", "description": "The all-in-one workspace for notes, tasks, and wikis.", "category": "Productivity", "rating": 4.9, "tags": ["Workspace", "Notes", "Collaboration"], "url": "https://notion.so"}, {"id": 29, "name": "Slack", "logo": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg", "description": "Where work happens - team communication and collaboration.", "category": "Productivity", "rating": 4.7, "tags": ["Chat", "Team", "Business"], "url": "https://slack.com"}, {"id": 30, "name": "Trello", "logo": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Trello-logo-blue.svg", "description": "Visual tool for managing projects and organizing anything.", "category": "Productivity", "rating": 4.5, "tags": ["Kanban", "Tasks", "Project"], "url": "https://trello.com"}, {"id": 31, "name": "Web Development Tool 31", "logo": "https://picsum.photos/seed/31/100/100", "description": "This is a high-performance tool for Web Development. It helps developers streamline their workflow and achieve better results in less time.", "category": "Web Development", "rating": 4.5, "tags": ["Web Development", "DevTool", "Modern"], "url": "#"}, {"id": 32, "name": "Android Tool 32", "logo": "https://picsum.photos/seed/32/100/100", "description": "This is a high-performance tool for Android. It helps developers streamline their workflow and achieve better results in less time.", "category": "Android", "rating": 4.5, "tags": ["Android", "DevTool", "Modern"], "url": "#"}, {"id": 33, "name": "iOS Tool 33", "logo": "https://picsum.photos/seed/33/100/100", "description": "This is a high-performance tool for iOS. It helps developers streamline their workflow and achieve better results in less time.", "category": "iOS", "rating": 4.5, "tags": ["iOS", "DevTool", "Modern"], "url": "#"}, {"id": 34, "name": "Backend Tool 34", "logo": "https://picsum.photos/seed/34/100/100", "description": "This is a high-performance tool for Backend. It helps developers streamline their workflow and achieve better results in less time.", "category": "Backend", "rating": 4.5, "tags": ["Backend", "DevTool", "Modern"], "url": "#"}, {"id": 35, "name": "Frontend Tool 35", "logo": "https://picsum.photos/seed/35/100/100", "description": "This is a high-performance tool for Frontend. It helps developers streamline their workflow and achieve better results in less time.", "category": "Frontend", "rating": 4.5, "tags": ["Frontend", "DevTool", "Modern"], "url": "#"}, {"id": 36, "name": "Design Tool 36", "logo": "https://picsum.photos/seed/36/100/100", "description": "This is a high-performance tool for Design. It helps developers streamline their workflow and achieve better results in less time.", "category": "Design", "rating": 4.5, "tags": ["Design", "DevTool", "Modern"], "url": "#"}, {"id": 37, "name": "UI/UX Tool 37", "logo": "https://picsum.photos/seed/37/100/100", "description": "This is a high-performance tool for UI/UX. It helps developers streamline their workflow and achieve better results in less time.", "category": "UI/UX", "rating": 4.5, "tags": ["UI/UX", "DevTool", "Modern"], "url": "#"}, {"id": 38, "name": "APIs Tool 38", "logo": "https://picsum.photos/seed/38/100/100", "description": "This is a high-performance tool for APIs. It helps developers streamline their workflow and achieve better results in less time.", "category": "APIs", "rating": 4.5, "tags": ["APIs", "DevTool", "Modern"], "url": "#"}, {"id": 39, "name": "Database Tool 39", "logo": "https://picsum.photos/seed/39/100/100", "description": "This is a high-performance tool for Database. It helps developers streamline their workflow and achieve better results in less time.", "category": "Database", "rating": 4.5, "tags": ["Database", "DevTool", "Modern"], "url": "#"}, {"id": 40, "name": "Cloud Tool 40", "logo": "https://picsum.photos/seed/40/100/100", "description": "This is a high-performance tool for Cloud. It helps developers streamline their workflow and achieve better results in less time.", "category": "Cloud", "rating": 4.5, "tags": ["Cloud", "DevTool", "Modern"], "url": "#"}, {"id": 41, "name": "DevOps Tool 41", "logo": "https://picsum.photos/seed/41/100/100", "description": "This is a high-performance tool for DevOps. It helps developers streamline their workflow and achieve better results in less time.", "category": "DevOps", "rating": 4.5, "tags": ["DevOps", "DevTool", "Modern"], "url": "#"}, {"id": 42, "name": "Productivity Tool 42", "logo": "https://picsum.photos/seed/42/100/100", "description": "This is a high-performance tool for Productivity. It helps developers streamline their workflow and achieve better results in less time.", "category": "Productivity", "rating": 4.5, "tags": ["Productivity", "DevTool", "Modern"], "url": "#"}, {"id": 43, "name": "Security Tool 43", "logo": "https://picsum.photos/seed/43/100/100", "description": "This is a high-performance tool for Security. It helps developers streamline their workflow and achieve better results in less time.", "category": "Security", "rating": 4.5, "tags": ["Security", "DevTool", "Modern"], "url": "#"}, {"id": 44, "name": "Learning Tool 44", "logo": "https://picsum.photos/seed/44/100/100", "description": "This is a high-performance tool for Learning. It helps developers streamline their workflow and achieve better results in less time.", "category": "Learning", "rating": 4.5, "tags": ["Learning", "DevTool", "Modern"], "url": "#"}, {"id": 45, "name": "AI Tool 45", "logo": "https://picsum.photos/seed/45/100/100", "description": "This is a high-performance tool for AI. It helps developers streamline their workflow and achieve better results in less time.", "category": "AI", "rating": 4.5, "tags": ["AI", "DevTool", "Modern"], "url": "#"}, {"id": 46, "name": "Web Development Tool 46", "logo": "https://picsum.photos/seed/46/100/100", "description": "This is a high-performance tool for Web Development. It helps developers streamline their workflow and achieve better results in less time.", "category": "Web Development", "rating": 4.5, "tags": ["Web Development", "DevTool", "Modern"], "url": "#"}, {"id": 47, "name": "Android Tool 47", "logo": "https://picsum.photos/seed/47/100/100", "description": "This is a high-performance tool for Android. It helps developers streamline their workflow and achieve better results in less time.", "category": "Android", "rating": 4.5, "tags": ["Android", "DevTool", "Modern"], "url": "#"}, {"id": 48, "name": "iOS Tool 48", "logo": "https://picsum.photos/seed/48/100/100", "description": "This is a high-performance tool for iOS. It helps developers streamline their workflow and achieve better results in less time.", "category": "iOS", "rating": 4.5, "tags": ["iOS", "DevTool", "Modern"], "url": "#"}, {"id": 49, "name": "Backend Tool 49", "logo": "https://picsum.photos/seed/49/100/100", "description": "This is a high-performance tool for Backend. It helps developers streamline their workflow and achieve better results in less time.", "category": "Backend", "rating": 4.5, "tags": ["Backend", "DevTool", "Modern"], "url": "#"}, {"id": 50, "name": "Frontend Tool 50", "logo": "https://picsum.photos/seed/50/100/100", "description": "This is a high-performance tool for Frontend. It helps developers streamline their workflow and achieve better results in less time.", "category": "Frontend", "rating": 4.5, "tags": ["Frontend", "DevTool", "Modern"], "url": "#"}, {"id": 51, "name": "Design Tool 51", "logo": "https://picsum.photos/seed/51/100/100", "description": "This is a high-performance tool for Design. It helps developers streamline their workflow and achieve better results in less time.", "category": "Design", "rating": 4.5, "tags": ["Design", "DevTool", "Modern"], "url": "#"}, {"id": 52, "name": "UI/UX Tool 52", "logo": "https://picsum.photos/seed/52/100/100", "description": "This is a high-performance tool for UI/UX. It helps developers streamline their workflow and achieve better results in less time.", "category": "UI/UX", "rating": 4.5, "tags": ["UI/UX", "DevTool", "Modern"], "url": "#"}, {"id": 53, "name": "APIs Tool 53", "logo": "https://picsum.photos/seed/53/100/100", "description": "This is a high-performance tool for APIs. It helps developers streamline their workflow and achieve better results in less time.", "category": "APIs", "rating": 4.5, "tags": ["APIs", "DevTool", "Modern"], "url": "#"}, {"id": 54, "name": "Database Tool 54", "logo": "https://picsum.photos/seed/54/100/100", "description": "This is a high-performance tool for Database. It helps developers streamline their workflow and achieve better results in less time.", "category": "Database", "rating": 4.5, "tags": ["Database", "DevTool", "Modern"], "url": "#"}, {"id": 55, "name": "Cloud Tool 55", "logo": "https://picsum.photos/seed/55/100/100", "description": "This is a high-performance tool for Cloud. It helps developers streamline their workflow and achieve better results in less time.", "category": "Cloud", "rating": 4.5, "tags": ["Cloud", "DevTool", "Modern"], "url": "#"}, {"id": 56, "name": "DevOps Tool 56", "logo": "https://picsum.photos/seed/56/100/100", "description": "This is a high-performance tool for DevOps. It helps developers streamline their workflow and achieve better results in less time.", "category": "DevOps", "rating": 4.5, "tags": ["DevOps", "DevTool", "Modern"], "url": "#"}, {"id": 57, "name": "Productivity Tool 57", "logo": "https://picsum.photos/seed/57/100/100", "description": "This is a high-performance tool for Productivity. It helps developers streamline their workflow and achieve better results in less time.", "category": "Productivity", "rating": 4.5, "tags": ["Productivity", "DevTool", "Modern"], "url": "#"}, {"id": 58, "name": "Security Tool 58", "logo": "https://picsum.photos/seed/58/100/100", "description": "This is a high-performance tool for Security. It helps developers streamline their workflow and achieve better results in less time.", "category": "Security", "rating": 4.5, "tags": ["Security", "DevTool", "Modern"], "url": "#"}, {"id": 59, "name": "Learning Tool 59", "logo": "https://picsum.photos/seed/59/100/100", "description": "This is a high-performance tool for Learning. It helps developers streamline their workflow and achieve better results in less time.", "category": "Learning", "rating": 4.5, "tags": ["Learning", "DevTool", "Modern"], "url": "#"}, {"id": 60, "name": "AI Tool 60", "logo": "https://picsum.photos/seed/60/100/100", "description": "This is a high-performance tool for AI. It helps developers streamline their workflow and achieve better results in less time.", "category": "AI", "rating": 4.5, "tags": ["AI", "DevTool", "Modern"], "url": "#"}, {"id": 61, "name": "Web Development Tool 61", "logo": "https://picsum.photos/seed/61/100/100", "description": "This is a high-performance tool for Web Development. It helps developers streamline their workflow and achieve better results in less time.", "category": "Web Development", "rating": 4.5, "tags": ["Web Development", "DevTool", "Modern"], "url": "#"}, {"id": 62, "name": "Android Tool 62", "logo": "https://picsum.photos/seed/62/100/100", "description": "This is a high-performance tool for Android. It helps developers streamline their workflow and achieve better results in less time.", "category": "Android", "rating": 4.5, "tags": ["Android", "DevTool", "Modern"], "url": "#"}, {"id": 63, "name": "iOS Tool 63", "logo": "https://picsum.photos/seed/63/100/100", "description": "This is a high-performance tool for iOS. It helps developers streamline their workflow and achieve better results in less time.", "category": "iOS", "rating": 4.5, "tags": ["iOS", "DevTool", "Modern"], "url": "#"}, {"id": 64, "name": "Backend Tool 64", "logo": "https://picsum.photos/seed/64/100/100", "description": "This is a high-performance tool for Backend. It helps developers streamline their workflow and achieve better results in less time.", "category": "Backend", "rating": 4.5, "tags": ["Backend", "DevTool", "Modern"], "url": "#"}, {"id": 65, "name": "Frontend Tool 65", "logo": "https://picsum.photos/seed/65/100/100", "description": "This is a high-performance tool for Frontend. It helps developers streamline their workflow and achieve better results in less time.", "category": "Frontend", "rating": 4.5, "tags": ["Frontend", "DevTool", "Modern"], "url": "#"}, {"id": 66, "name": "Design Tool 66", "logo": "https://picsum.photos/seed/66/100/100", "description": "This is a high-performance tool for Design. It helps developers streamline their workflow and achieve better results in less time.", "category": "Design", "rating": 4.5, "tags": ["Design", "DevTool", "Modern"], "url": "#"}, {"id": 67, "name": "UI/UX Tool 67", "logo": "https://picsum.photos/seed/67/100/100", "description": "This is a high-performance tool for UI/UX. It helps developers streamline their workflow and achieve better results in less time.", "category": "UI/UX", "rating": 4.5, "tags": ["UI/UX", "DevTool", "Modern"], "url": "#"}, {"id": 68, "name": "APIs Tool 68", "logo": "https://picsum.photos/seed/68/100/100", "description": "This is a high-performance tool for APIs. It helps developers streamline their workflow and achieve better results in less time.", "category": "APIs", "rating": 4.5, "tags": ["APIs", "DevTool", "Modern"], "url": "#"}, {"id": 69, "name": "Database Tool 69", "logo": "https://picsum.photos/seed/69/100/100", "description": "This is a high-performance tool for Database. It helps developers streamline their workflow and achieve better results in less time.", "category": "Database", "rating": 4.5, "tags": ["Database", "DevTool", "Modern"], "url": "#"}, {"id": 70, "name": "Cloud Tool 70", "logo": "https://picsum.photos/seed/70/100/100", "description": "This is a high-performance tool for Cloud. It helps developers streamline their workflow and achieve better results in less time.", "category": "Cloud", "rating": 4.5, "tags": ["Cloud", "DevTool", "Modern"], "url": "#"}, {"id": 71, "name": "DevOps Tool 71", "logo": "https://picsum.photos/seed/71/100/100", "description": "This is a high-performance tool for DevOps. It helps developers streamline their workflow and achieve better results in less time.", "category": "DevOps", "rating": 4.5, "tags": ["DevOps", "DevTool", "Modern"], "url": "#"}, {"id": 72, "name": "Productivity Tool 72", "logo": "https://picsum.photos/seed/72/100/100", "description": "This is a high-performance tool for Productivity. It helps developers streamline their workflow and achieve better results in less time.", "category": "Productivity", "rating": 4.5, "tags": ["Productivity", "DevTool", "Modern"], "url": "#"}, {"id": 73, "name": "Security Tool 73", "logo": "https://picsum.photos/seed/73/100/100", "description": "This is a high-performance tool for Security. It helps developers streamline their workflow and achieve better results in less time.", "category": "Security", "rating": 4.5, "tags": ["Security", "DevTool", "Modern"], "url": "#"}, {"id": 74, "name": "Learning Tool 74", "logo": "https://picsum.photos/seed/74/100/100", "description": "This is a high-performance tool for Learning. It helps developers streamline their workflow and achieve better results in less time.", "category": "Learning", "rating": 4.5, "tags": ["Learning", "DevTool", "Modern"], "url": "#"}, {"id": 75, "name": "AI Tool 75", "logo": "https://picsum.photos/seed/75/100/100", "description": "This is a high-performance tool for AI. It helps developers streamline their workflow and achieve better results in less time.", "category": "AI", "rating": 4.5, "tags": ["AI", "DevTool", "Modern"], "url": "#"}, {"id": 76, "name": "Web Development Tool 76", "logo": "https://picsum.photos/seed/76/100/100", "description": "This is a high-performance tool for Web Development. It helps developers streamline their workflow and achieve better results in less time.", "category": "Web Development", "rating": 4.5, "tags": ["Web Development", "DevTool", "Modern"], "url": "#"}, {"id": 77, "name": "Android Tool 77", "logo": "https://picsum.photos/seed/77/100/100", "description": "This is a high-performance tool for Android. It helps developers streamline their workflow and achieve better results in less time.", "category": "Android", "rating": 4.5, "tags": ["Android", "DevTool", "Modern"], "url": "#"}, {"id": 78, "name": "iOS Tool 78", "logo": "https://picsum.photos/seed/78/100/100", "description": "This is a high-performance tool for iOS. It helps developers streamline their workflow and achieve better results in less time.", "category": "iOS", "rating": 4.5, "tags": ["iOS", "DevTool", "Modern"], "url": "#"}, {"id": 79, "name": "Backend Tool 79", "logo": "https://picsum.photos/seed/79/100/100", "description": "This is a high-performance tool for Backend. It helps developers streamline their workflow and achieve better results in less time.", "category": "Backend", "rating": 4.5, "tags": ["Backend", "DevTool", "Modern"], "url": "#"}, {"id": 80, "name": "Frontend Tool 80", "logo": "https://picsum.photos/seed/80/100/100", "description": "This is a high-performance tool for Frontend. It helps developers streamline their workflow and achieve better results in less time.", "category": "Frontend", "rating": 4.5, "tags": ["Frontend", "DevTool", "Modern"], "url": "#"}, {"id": 81, "name": "Design Tool 81", "logo": "https://picsum.photos/seed/81/100/100", "description": "This is a high-performance tool for Design. It helps developers streamline their workflow and achieve better results in less time.", "category": "Design", "rating": 4.5, "tags": ["Design", "DevTool", "Modern"], "url": "#"}, {"id": 82, "name": "UI/UX Tool 82", "logo": "https://picsum.photos/seed/82/100/100", "description": "This is a high-performance tool for UI/UX. It helps developers streamline their workflow and achieve better results in less time.", "category": "UI/UX", "rating": 4.5, "tags": ["UI/UX", "DevTool", "Modern"], "url": "#"}, {"id": 83, "name": "APIs Tool 83", "logo": "https://picsum.photos/seed/83/100/100", "description": "This is a high-performance tool for APIs. It helps developers streamline their workflow and achieve better results in less time.", "category": "APIs", "rating": 4.5, "tags": ["APIs", "DevTool", "Modern"], "url": "#"}, {"id": 84, "name": "Database Tool 84", "logo": "https://picsum.photos/seed/84/100/100", "description": "This is a high-performance tool for Database. It helps developers streamline their workflow and achieve better results in less time.", "category": "Database", "rating": 4.5, "tags": ["Database", "DevTool", "Modern"], "url": "#"}, {"id": 85, "name": "Cloud Tool 85", "logo": "https://picsum.photos/seed/85/100/100", "description": "This is a high-performance tool for Cloud. It helps developers streamline their workflow and achieve better results in less time.", "category": "Cloud", "rating": 4.5, "tags": ["Cloud", "DevTool", "Modern"], "url": "#"}, {"id": 86, "name": "DevOps Tool 86", "logo": "https://picsum.photos/seed/86/100/100", "description": "This is a high-performance tool for DevOps. It helps developers streamline their workflow and achieve better results in less time.", "category": "DevOps", "rating": 4.5, "tags": ["DevOps", "DevTool", "Modern"], "url": "#"}, {"id": 87, "name": "Productivity Tool 87", "logo": "https://picsum.photos/seed/87/100/100", "description": "This is a high-performance tool for Productivity. It helps developers streamline their workflow and achieve better results in less time.", "category": "Productivity", "rating": 4.5, "tags": ["Productivity", "DevTool", "Modern"], "url": "#"}, {"id": 88, "name": "Security Tool 88", "logo": "https://picsum.photos/seed/88/100/100", "description": "This is a high-performance tool for Security. It helps developers streamline their workflow and achieve better results in less time.", "category": "Security", "rating": 4.5, "tags": ["Security", "DevTool", "Modern"], "url": "#"}, {"id": 89, "name": "Learning Tool 89", "logo": "https://picsum.photos/seed/89/100/100", "description": "This is a high-performance tool for Learning. It helps developers streamline their workflow and achieve better results in less time.", "category": "Learning", "rating": 4.5, "tags": ["Learning", "DevTool", "Modern"], "url": "#"}, {"id": 90, "name": "AI Tool 90", "logo": "https://picsum.photos/seed/90/100/100", "description": "This is a high-performance tool for AI. It helps developers streamline their workflow and achieve better results in less time.", "category": "AI", "rating": 4.5, "tags": ["AI", "DevTool", "Modern"], "url": "#"}, {"id": 91, "name": "Web Development Tool 91", "logo": "https://picsum.photos/seed/91/100/100", "description": "This is a high-performance tool for Web Development. It helps developers streamline their workflow and achieve better results in less time.", "category": "Web Development", "rating": 4.5, "tags": ["Web Development", "DevTool", "Modern"], "url": "#"}, {"id": 92, "name": "Android Tool 92", "logo": "https://picsum.photos/seed/92/100/100", "description": "This is a high-performance tool for Android. It helps developers streamline their workflow and achieve better results in less time.", "category": "Android", "rating": 4.5, "tags": ["Android", "DevTool", "Modern"], "url": "#"}, {"id": 93, "name": "iOS Tool 93", "logo": "https://picsum.photos/seed/93/100/100", "description": "This is a high-performance tool for iOS. It helps developers streamline their workflow and achieve better results in less time.", "category": "iOS", "rating": 4.5, "tags": ["iOS", "DevTool", "Modern"], "url": "#"}, {"id": 94, "name": "Backend Tool 94", "logo": "https://picsum.photos/seed/94/100/100", "description": "This is a high-performance tool for Backend. It helps developers streamline their workflow and achieve better results in less time.", "category": "Backend", "rating": 4.5, "tags": ["Backend", "DevTool", "Modern"], "url": "#"}, {"id": 95, "name": "Frontend Tool 95", "logo": "https://picsum.photos/seed/95/100/100", "description": "This is a high-performance tool for Frontend. It helps developers streamline their workflow and achieve better results in less time.", "category": "Frontend", "rating": 4.5, "tags": ["Frontend", "DevTool", "Modern"], "url": "#"}, {"id": 96, "name": "Design Tool 96", "logo": "https://picsum.photos/seed/96/100/100", "description": "This is a high-performance tool for Design. It helps developers streamline their workflow and achieve better results in less time.", "category": "Design", "rating": 4.5, "tags": ["Design", "DevTool", "Modern"], "url": "#"}, {"id": 97, "name": "UI/UX Tool 97", "logo": "https://picsum.photos/seed/97/100/100", "description": "This is a high-performance tool for UI/UX. It helps developers streamline their workflow and achieve better results in less time.", "category": "UI/UX", "rating": 4.5, "tags": ["UI/UX", "DevTool", "Modern"], "url": "#"}, {"id": 98, "name": "APIs Tool 98", "logo": "https://picsum.photos/seed/98/100/100", "description": "This is a high-performance tool for APIs. It helps developers streamline their workflow and achieve better results in less time.", "category": "APIs", "rating": 4.5, "tags": ["APIs", "DevTool", "Modern"], "url": "#"}, {"id": 99, "name": "Database Tool 99", "logo": "https://picsum.photos/seed/99/100/100", "description": "This is a high-performance tool for Database. It helps developers streamline their workflow and achieve better results in less time.", "category": "Database", "rating": 4.5, "tags": ["Database", "DevTool", "Modern"], "url": "#"}, {"id": 100, "name": "Cloud Tool 100", "logo": "https://picsum.photos/seed/100/100/100", "description": "This is a high-performance tool for Cloud. It helps developers streamline their workflow and achieve better results in less time.", "category": "Cloud", "rating": 4.5, "tags": ["Cloud", "DevTool", "Modern"], "url": "#"}, {"id": 101, "name": "DevOps Tool 101", "logo": "https://picsum.photos/seed/101/100/100", "description": "This is a high-performance tool for DevOps. It helps developers streamline their workflow and achieve better results in less time.", "category": "DevOps", "rating": 4.5, "tags": ["DevOps", "DevTool", "Modern"], "url": "#"}, {"id": 102, "name": "Productivity Tool 102", "logo": "https://picsum.photos/seed/102/100/100", "description": "This is a high-performance tool for Productivity. It helps developers streamline their workflow and achieve better results in less time.", "category": "Productivity", "rating": 4.5, "tags": ["Productivity", "DevTool", "Modern"], "url": "#"}, {"id": 103, "name": "Security Tool 103", "logo": "https://picsum.photos/seed/103/100/100", "description": "This is a high-performance tool for Security. It helps developers streamline their workflow and achieve better results in less time.", "category": "Security", "rating": 4.5, "tags": ["Security", "DevTool", "Modern"], "url": "#"}, {"id": 104, "name": "Learning Tool 104", "logo": "https://picsum.photos/seed/104/100/100", "description": "This is a high-performance tool for Learning. It helps developers streamline their workflow and achieve better results in less time.", "category": "Learning", "rating": 4.5, "tags": ["Learning", "DevTool", "Modern"], "url": "#"}, {"id": 105, "name": "AI Tool 105", "logo": "https://picsum.photos/seed/105/100/100", "description": "This is a high-performance tool for AI. It helps developers streamline their workflow and achieve better results in less time.", "category": "AI", "rating": 4.5, "tags": ["AI", "DevTool", "Modern"], "url": "#"}, {"id": 106, "name": "Web Development Tool 106", "logo": "https://picsum.photos/seed/106/100/100", "description": "This is a high-performance tool for Web Development. It helps developers streamline their workflow and achieve better results in less time.", "category": "Web Development", "rating": 4.5, "tags": ["Web Development", "DevTool", "Modern"], "url": "#"}, {"id": 107, "name": "Android Tool 107", "logo": "https://picsum.photos/seed/107/100/100", "description": "This is a high-performance tool for Android. It helps developers streamline their workflow and achieve better results in less time.", "category": "Android", "rating": 4.5, "tags": ["Android", "DevTool", "Modern"], "url": "#"}, {"id": 108, "name": "iOS Tool 108", "logo": "https://picsum.photos/seed/108/100/100", "description": "This is a high-performance tool for iOS. It helps developers streamline their workflow and achieve better results in less time.", "category": "iOS", "rating": 4.5, "tags": ["iOS", "DevTool", "Modern"], "url": "#"}, {"id": 109, "name": "Backend Tool 109", "logo": "https://picsum.photos/seed/109/100/100", "description": "This is a high-performance tool for Backend. It helps developers streamline their workflow and achieve better results in less time.", "category": "Backend", "rating": 4.5, "tags": ["Backend", "DevTool", "Modern"], "url": "#"}, {"id": 110, "name": "Frontend Tool 110", "logo": "https://picsum.photos/seed/110/100/100", "description": "This is a high-performance tool for Frontend. It helps developers streamline their workflow and achieve better results in less time.", "category": "Frontend", "rating": 4.5, "tags": ["Frontend", "DevTool", "Modern"], "url": "#"}];
+
+document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('tools-grid');
+    const searchInput = document.getElementById('search-input');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const backToTop = document.getElementById('back-to-top');
+    const loadingOverlay = document.getElementById('loading-overlay');
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Back to Top
+    window.onscroll = () => {
+        if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+            backToTop.style.display = "flex";
+        } else {
+            backToTop.style.display = "none";
+        }
+    };
+
+    backToTop.onclick = () => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+
+    // Rendering Function
+    function renderTools(tools) {
+        if (!grid) return;
+        grid.innerHTML = '';
+        
+        if (tools.length === 0) {
+            grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--secondary-text);">No tools found matching your criteria.</div>';
+            return;
+        }
+
+        tools.forEach(tool => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-header" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <img src="${tool.logo}" alt="${tool.name}" style="width: 48px; height: 48px; border-radius: 10px; object-fit: cover; background: #222;" loading="lazy">
+                    <div>
+                        <h3 style="font-size: 1.1rem;">${tool.name}</h3>
+                        <span style="color: var(--accent-color); font-size: 0.8rem; font-weight: 600;">${tool.category}</span>
+                    </div>
+                </div>
+                <p style="color: var(--secondary-text); font-size: 0.9rem; margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8rem;">${tool.description}</p>
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                    <span style="color: #FFD700;">★</span>
+                    <span style="font-weight: 600;">${tool.rating}</span>
+                    <div style="display: flex; gap: 0.3rem; margin-left: auto;">
+                        ${tool.tags.slice(0, 2).map(tag => `<span style="background: #222; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem;">${tag}</span>`).join('')}
+                    </div>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <a href="${tool.url}" class="btn btn-primary" style="flex: 1; font-size: 0.8rem; padding: 0.6rem;" target="_blank">Visit</a>
+                    <button class="btn btn-secondary save-btn" style="padding: 0.6rem;" onclick="toggleSave(${tool.id})">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2z"/></svg>
+                    </button>
+                    <button class="btn btn-secondary share-btn" style="padding: 0.6rem;" onclick="shareTool('${tool.name}')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
+                    </button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // Search Functionality
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = toolsData.filter(t => 
+                t.name.toLowerCase().includes(term) || 
+                t.description.toLowerCase().includes(term) ||
+                t.tags.some(tag => tag.toLowerCase().includes(term))
+            );
+            renderTools(filtered);
+        });
+    }
+
+    // Filter Functionality
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const category = btn.dataset.category;
+            const filtered = category === 'all' ? toolsData : toolsData.filter(t => t.category === category);
+            renderTools(filtered);
+        });
+    });
+
+    // Initial Render
+    setTimeout(() => {
+        if (loadingOverlay) loadingOverlay.style.opacity = '0';
+        setTimeout(() => { if (loadingOverlay) loadingOverlay.style.display = 'none'; }, 500);
+        
+        // Page specific logic
+        const path = window.location.pathname;
+        let initialData = toolsData;
+        
+        if (path.includes('ai-tools')) initialData = toolsData.filter(t => t.category === 'AI');
+        else if (path.includes('mobile-apps')) initialData = toolsData.filter(t => t.category === 'Android' || t.category === 'iOS');
+        else if (path.includes('apis')) initialData = toolsData.filter(t => t.category === 'APIs');
+        else if (path.includes('learning')) initialData = toolsData.filter(t => t.category === 'Learning');
+        
+        renderTools(initialData);
+    }, 1000);
+});
+
+function toggleSave(id) {
+    alert('Tool saved to favorites!');
+}
+
+function shareTool(name) {
+    alert('Sharing ' + name);
+}
+
+    </script>
+</body>
+</html>
+    
